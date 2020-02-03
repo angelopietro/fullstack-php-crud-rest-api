@@ -88,7 +88,7 @@ class Urls extends CI_Controller
 	{
 		if ($this->check()) {
 			$resp = $this->UrlsModel->url_delete_data($id);
-			json_output(200, $resp);
+			output_json(200, $resp);
 		}
 	}
 }
