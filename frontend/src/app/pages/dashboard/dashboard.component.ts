@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ApiService} from '../../services/api.service';
-import { Url } from '../../interfaces/url';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,20 +8,10 @@ import { Url } from '../../interfaces/url';
 })
 export class DashboardComponent implements OnInit {
 
-  urls:  Url[];
 
+  constructor() { }
 
-  constructor(private apiService: ApiService) { }
+  ngOnInit() { }
 
-  ngOnInit() {
-    this.loadUrls();
-  }
-
-  async loadUrls(){
-    await this.apiService.getUrls().subscribe(res =>{
-      this.urls = res;
-      console.log(res);
-    })
-  }
 
 }

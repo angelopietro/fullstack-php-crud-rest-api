@@ -1,0 +1,27 @@
+<div class="card-form">
+  <h2>EDITANDO A URL</h2>
+  <form [formGroup]="urlForm" (ngSubmit)="handleSubmit()">
+
+
+    <input   formControlName="id"  id="id" type="hidden">
+    <mat-form-field appearance="outline">
+
+      <mat-label>Título da url</mat-label>
+      <input matInput id="title" formControlName="title"    minlength="5" maxlength="150" required/>
+      <mat-hint *ngIf="urlForm.controls['title'].hasError('required') && urlForm.controls['title'].touched">
+      Digite o título da Url!
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Url</mat-label>
+      <input matInput id="url" formControlName="url"  pattern="https?://.+" minlength="5" maxlength="150" required/>
+    </mat-form-field>
+
+    <button mat-flat-button color="warn" type="submit"  >
+      <i antIcon type="check"></i> Atualizar URL
+    </button>
+    <a [routerLink]="['/']" mat-flat-button>Cancelar</a>
+  </form>
+
+</div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from  'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { catchError, tap, map } from 'rxjs/operators';
 
 import { Url } from '../interfaces/url';
 import { User } from '../interfaces/user';
@@ -19,16 +20,24 @@ export class ApiService {
     return this.httpClient.get<Url[]>(`${this.PHP_API_SERVER}/urls`);
   }
 
+
+  getUrlByID(id: number): Observable<Url> {
+      return this.httpClient.get<Url>(`${this.PHP_API_SERVER}/urls/${id}`);
+    }
+
+
   createUrl(url: Url): Observable<Url>{
+
     return this.httpClient.post<Url>(`${this.PHP_API_SERVER}/urls`, url);
   }
 
-  updateUrl(url: Url, id: number){
-    return this.httpClient.put<Url>(`${this.PHP_API_SERVER}/urls/${id}`, url);
+  updateUrl(url: Url): Observable<Url>{
+
+    return this.httpClient.put<Url>(`${this.PHP_API_SERVER}/urls/${url.id}`, url);
   }
 
   deleteUrl(id: number){
-    return this.httpClient.delete<Url>(`${this.PHP_API_SERVER}/urls/${id}`);
+     return this.httpClient.delete<Url>(`${this.PHP_API_SERVER}/urls/${id}`);
   }
 
   //Users

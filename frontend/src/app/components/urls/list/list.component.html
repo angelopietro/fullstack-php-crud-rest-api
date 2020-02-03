@@ -1,0 +1,39 @@
+<mat-card>
+
+  <a  [routerLink]="['/urls/new/']">Adicionar Url</a>
+
+  <mat-card-header>
+    <mat-card-title>Lista de urls</mat-card-title>
+  </mat-card-header>
+
+  <table>
+  <thead>
+    <tr>
+    <th>#</th>
+    <th>Titulo</th>
+    <th>Status</th>
+    <th>Criado em</th>
+    <th>Atualizado em</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let url of urls">
+    <td>{{ url.id }}</td>
+    <td>{{ url.title }}</td>
+    <td>
+      {{ url.status }}
+
+    </td>
+    <td>{{ url.created_at | date: 'dd/MM/yyyy - hh:mm' }}</td>
+    <td>{{ url.updated_at | date: 'dd/MM/yyyy - hh:mm' }}</td>
+    <td>
+      <a [routerLink]="['/urls/edit/' + url.id]"  title="Editar Url" alt="Editar Url">Editar</a>
+      &nbsp;
+      <a href="#" title="Remover Url" alt="Remover Url" (click)="handleDelete(url.id)">Remover</a>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+</mat-card>
