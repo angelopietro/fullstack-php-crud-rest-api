@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  API: 'http://localhost:80/challengeway/backend',
+  API: 'http://localhost:80/backend',
   BASE_URL: ''
 };
