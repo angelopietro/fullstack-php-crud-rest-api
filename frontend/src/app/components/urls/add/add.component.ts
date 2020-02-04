@@ -41,11 +41,9 @@ export class AddUrlComponent implements OnInit {
 
       }
 
-      this.apiService.createUrl(formPayload).subscribe(data => {
-
-          this.router.navigate(["/"])
-
-
+      this.apiService.createUrl(formPayload)
+      .subscribe(() => {
+        this.router.navigate(["/"])
       });
      }
 

@@ -21,26 +21,16 @@ export class ListUrlComponent implements OnInit {
   async loadUrls(){
     await this.apiService.getUrls().subscribe(res =>{
       this.urls = res;
-     // console.log(res);
     });
   }
 
 
-
-
   handleDelete(urlID): void {
-    this.apiService.deleteUrl(urlID)
-      .subscribe(data => {
-       console.log(data);
-      });
+    this.apiService.deleteUrl(urlID).subscribe(() =>{
+      this.loadUrls();
+    });
+
   };
-
- /* handleDelete(urlID) {
-
-    this.apiService.deleteUrl(urlID);
-  //  this.urls = this.loadUrls();
-  }*/
-
 
 
 }

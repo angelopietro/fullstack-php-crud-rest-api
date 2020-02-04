@@ -5,57 +5,63 @@ import { catchError, tap, map } from 'rxjs/operators';
 
 import { Url } from '../interfaces/url';
 import { User } from '../interfaces/user';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  PHP_API_SERVER = "http://localhost/challengeway/backend";
+  PHP_API_SERVER = "api";
 
   constructor(private httpClient: HttpClient) { }
 
   //URLS
   getUrls(): Observable<Url[]>{
-    return this.httpClient.get<Url[]>(`${this.PHP_API_SERVER}/urls`);
+    return this.httpClient.get<Url[]>(`api/urls`);
   }
 
 
   getUrlByID(id: number): Observable<Url> {
-      return this.httpClient.get<Url>(`${this.PHP_API_SERVER}/urls/${id}`);
+      return this.httpClient.get<Url>(environment.BASE_URL + `/urls/${id}`);
     }
 
 
   createUrl(url: Url): Observable<Url>{
 
-    return this.httpClient.post<Url>(`${this.PHP_API_SERVER}/urls`, url);
+    return this.httpClient.post<Url>(environment.BASE_URL + `/urls`, url);
   }
 
   updateUrl(url: Url): Observable<Url>{
 
-    return this.httpClient.put<Url>(`${this.PHP_API_SERVER}/urls/${url.id}`, url);
+    return this.httpClient.put<Url>(environment.BASE_URL + `/urls/${url.id}`, url);
   }
 
   deleteUrl(id: number){
-     return this.httpClient.delete<Url>(`${this.PHP_API_SERVER}/urls/${id}`);
+     return this.httpClient.delete<Url>(environment.BASE_URL + `/urls/${id}`);
   }
 
   //Users
 
   getUsers(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`${this.PHP_API_SERVER}/users`);
+    return this.httpClient.get<User[]>(environment.BASE_URL + `/users`);
   }
 
+  getUserByID(id: number): Observable<User> {
+    return this.httpClient.get<User>(environment.BASE_URL + `/users/${id}`);
+  }
+
+
   createUser(user: User): Observable<User>{
-    return this.httpClient.post<User>(`${this.PHP_API_SERVER}/users`, user);
+    return this.httpClient.post<User>(environment.BASE_URL + `/users`, user);
   }
 
   updateUser(user: User, id: number){
-    return this.httpClient.put<User>(`${this.PHP_API_SERVER}/users/${id}`, user);
+    return this.httpClient.put<User>(environment.BASE_URL + `/users/${id}`, user);
   }
 
   deleteUser(id: number){
-    return this.httpClient.delete<User>(`${this.PHP_API_SERVER}/users/${id}`);
+    return this.httpClient.delete<User>(environment.BASE_URL + `/users/${id}`);
   }
 
 }

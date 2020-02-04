@@ -43,8 +43,9 @@ export class EditUrlComponent implements OnInit {
 
     this.apiService.updateUrl(this.urlForm.value)
       .pipe(first())
-      .subscribe(
-        data => console.log(data) );
+      .subscribe(() => {
+        this.router.navigate(["/"])
+      });
   }
 
 
