@@ -6,5 +6,7 @@ url: string;
 status: boolean;
 created_at: Date;
 updated_at:  Date;
+response_code: string;
+response_msg: string;
 }
 

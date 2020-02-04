@@ -33,7 +33,7 @@ export class EditUrlComponent implements OnInit {
     this.apiService.getUrlByID(id)
       .subscribe( data => {
         this.urlForm.setValue(data);
-      })
+      });
 
   }
 
@@ -44,7 +44,7 @@ export class EditUrlComponent implements OnInit {
     this.apiService.updateUrl(this.urlForm.value)
       .pipe(first())
       .subscribe(() => {
-        this.router.navigate(["/"])
+        this.router.navigate(["/urls"])
       });
   }
 

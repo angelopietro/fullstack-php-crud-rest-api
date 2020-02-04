@@ -1,1 +1,51 @@
-<p>list works!</p>
+<div class="col-md-11" style="padding-top: 80px">
+  <div class="card col-md-12">
+    <div class="card-header card-header-success">
+      <h4 class="card-title">Lista de Usuários</h4>
+    </div>
+    <div class="card-body">
+
+
+
+
+  <a [routerLink]="['/users/new/']"  routerLinkActive="router-link-active" class="mr-2 btn btn-success" mat-raised-button><i
+    class="material-icons mr-3">person_add</i> Adicionar Usuário</a>
+
+
+  <table>
+  <thead>
+    <tr>
+    <td class="label-strong">#</td>
+    <td class="label-strong">Nome</td>
+    <td class="label-strong">Email</td>
+    <td class="label-strong">Login</td>
+    <td class="label-strong">Último acesso</td>
+    <td class="label-strong"></td>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let usr of users">
+    <td>{{ usr.id }}</td>
+    <td>{{ usr.name }}</td>
+    <td>
+      {{ usr.email }}
+
+    </td>
+    <td>{{ usr.username}}</td>
+    <td>{{ usr.last_login | date: 'dd/MM/yyyy - hh:mm' }}</td>
+    <td>
+      <a [routerLink]="['/users/edit/' + usr.id]"  class="btn btn-link btn-info"  title="Editar Usuário" alt="Editar Usuário"><i class="material-icons">edit</i></a>
+      &nbsp;
+      <a class="btn btn-danger btn-link" alt="Remover Usuário" (click)="handleDelete(usr.id)"><i class="material-icons">delete_forever</i></a>
+  </td>
+  </tr>
+  </tbody>
+  </table>
+
+
+</div>
+
+
+</div>
+</div>

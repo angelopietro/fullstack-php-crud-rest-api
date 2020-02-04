@@ -1,0 +1,40 @@
+
+<body class="login-background">
+
+  <div class="login-page-side">
+
+      <div class="login-box">
+
+        <div class="login-box-body">
+
+
+          <div class="login-logo text-center">
+              <img alt="Wide Pay" src="./assets/img/widepay.png">
+          </div>
+
+
+          <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+            <mat-form-field appearance="outline">
+              <mat-label>Digite seu Usuário</mat-label>
+              <input matInput formControlName="username" placeholder="Seu usuário" type="text">
+              <mat-icon matSuffix>person_outline</mat-icon>
+              <mat-error *ngIf="formControls.username.errors?.required">Você deve digitar seu usuário</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Digite sua Senha</mat-label>
+              <input matInput formControlName="password" placeholder="Sua senha" type="password" >
+              <mat-icon matSuffix>lock_outline</mat-icon>
+              <mat-error *ngIf="formControls.password.errors?.required">Você deve digitar sua senha</mat-error>
+            </mat-form-field>
+
+            <div>
+            <button mat-flat-button type="submit" class="btn btn-success" [disabled]="loading">Acessar</button>
+            <mat-progress-spinner diameter="30" mode="indeterminate" *ngIf="loading" class="float-right"></mat-progress-spinner>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>

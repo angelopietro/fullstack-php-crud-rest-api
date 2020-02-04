@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,9 +18,20 @@ import { ListUrlComponent } from './components/urls/list/list.component';
 import { AddUrlComponent } from './components/urls/add/add.component';
 import { EditUrlComponent } from './components/urls/edit/edit.component';
 
+import { ListUserComponent } from './components/users/list/list.component';
+import { AddUserComponent } from './components/users/add/add.component';
+import { EditUserComponent } from './components/users/edit/edit.component';
+
 //Libs Module
-import {MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule} from '@angular/material';
+import {MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule, MatIconModule, MatMenuModule, MatTableModule, MatDialogModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { VerifyStatusComponent } from './components/verify-status/verify-status.component';
+import { PreviewUrlComponent } from './components/urls/preview/preview.component';
+import { LoginComponent } from './pages/login/login.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { TemplateComponent } from './pages/template/template.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +40,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DashboardComponent,
     ListUrlComponent,
     AddUrlComponent,
-    EditUrlComponent
+    EditUrlComponent,
+    ListUserComponent,
+    AddUserComponent,
+    EditUserComponent,
+    VerifyStatusComponent,
+    PreviewUrlComponent,
+    LoginComponent,
+    FooterComponent,
+    SidebarComponent,
+    NavbarComponent,
+    TemplateComponent
   ],
   imports: [
     BrowserModule,
@@ -36,10 +58,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    FormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatDialogModule,
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule
 
   ],
   providers: [],

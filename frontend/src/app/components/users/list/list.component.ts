@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-list',
+  selector: 'app-user-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.less']
 })
-export class ListComponent implements OnInit {
+export class ListUserComponent implements OnInit {
 
-  constructor() { }
+
+  users;
+
+
+  constructor(private apiService: ApiService, private router: Router) { }
 
   ngOnInit() {
+    this.loadUsers();
   }
 
-}
+  async loadUsers(){
+    await this.apiService.getUsers().subscribe(res =>{
+      this.users = res;
+    });
+  }
+
+
+  handleDelete(userID): void {
+    this.apiService.deleteUser(userID).subscribe(() =>{
+      this.loadUsers();
+    });
+
+  };
+
+ }

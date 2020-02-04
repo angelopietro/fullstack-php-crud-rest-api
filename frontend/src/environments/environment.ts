@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost:80/backend',
+  API: 'http://localhost:80/challengeway/backend',
   BASE_URL: '/api'
 };
 

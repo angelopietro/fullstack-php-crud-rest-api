@@ -1,0 +1,22 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index"
+      aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-index">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+      <span class="navbar-toggler-icon icon-bar"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navigation-index">
+      <ul class="navbar-nav mr-auto  col-md-12">
+        <li class="nav-item mr-10 col-md-10">Olá <b>{{ currentUser?.nome }},</b> você está em seu painel! </li>
+        <li class="nav-item active">
+          <a class="nav-link btn" (click)="logout()">
+            <i class="material-icons">settings_power</i> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

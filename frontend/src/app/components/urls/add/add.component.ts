@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -11,41 +11,38 @@ import { Url } from '../../../interfaces/url';
   styleUrls: ['./add.component.less']
 })
 export class AddUrlComponent implements OnInit {
-  urlForm: FormGroup;
-  url: Url[];
+urlForm: FormGroup;
+url: Url[];
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) { }
+constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) { }
 
-  ngOnInit() {
+ngOnInit() {
 
-    this.urlForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      url: ['', Validators.required]
-    });
+  this.urlForm = this.formBuilder.group({
+    title: ['', Validators.required],
+    url: ['', Validators.required]
+  });
 
+}
+
+handleSubmit(): void {
+  if (this.urlForm.invalid) {
+    return;
   }
 
-  handleSubmit(): void {
-    if (this.urlForm.invalid) {
-      return;
-    }
+  const formPayload = {
+    id: null,
+    user_id: 1,
+    title: this.urlForm.controls.title.value,
+    url: this.urlForm.controls.url.value,
+    status: null,
+    created_at: null,
+    updated_at: null
+  }
 
-      const formPayload = {
-        id: null,
-        user_id: 1,
-        title: this.urlForm.controls.title.value,
-        url: this.urlForm.controls.url.value,
-        status: null,
-        created_at: null,
-        updated_at: null
-
-      }
-
-      this.apiService.createUrl(formPayload)
-      .subscribe(() => {
-        this.router.navigate(["/"])
-      });
-     }
-
-
+    this.apiService.createUrl(this.urlForm.value)
+    .subscribe(() => {
+      this.router.navigate(["/urls"])
+    });
+  }
 }
