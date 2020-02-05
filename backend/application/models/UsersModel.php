@@ -7,7 +7,7 @@ class UsersModel extends CI_Model
     private $table = 'users';
 
 
-    public function users_all_data()
+    public function users_all()
     {
         return $this->db->select('id, username, name, email, last_login, created_at, updated_at')
             ->from($this->table)
@@ -15,16 +15,16 @@ class UsersModel extends CI_Model
             ->get()->result();
     }
 
-    public function users_detail_data($id)
+    public function users_detail($id)
     {
-        return $this->db->select('id, username, name, email, last_login, created_at, updated_at')
+        return $this->db->select('id, username, name, email, password, last_login, created_at, updated_at')
             ->from($this->table)->where('id', $id)
             ->order_by('id', 'desc')
             ->get()
             ->row();
     }
 
-    public function users_create_data($data)
+    public function users_create($data)
     {
         $userExists = $this->db->select('username')
             ->from($this->table)
@@ -43,20 +43,33 @@ class UsersModel extends CI_Model
 
             $this->db->insert($this->table, $req);
 
-            return array('status' => 201, 'message' => 'New user has been created.');
+            return array('status' => 200, 'message' => 'New user has been created.');
         } else {
 
             return array('status' => 400, 'message' => 'The username (' . $data['username'] . ') already exists');
         }
     }
 
-    public function users_update_data($id, $data)
+    public function users_update($id, $data)
     {
-        $this->db->where('id', $id)->update($this->table, $data);
+
+		if($data['password'])
+		{
+			$newData['name'] = $data['name'];
+			$newData['email'] = $data['email'];
+			$newData['username'] = $data['username'];		
+			$newData['password'] = $this->bcrypt->hash_password($data['password']);
+			$this->db->where('id', $id)->update($this->table, $newData);
+		}else{
+			$newData['name'] = $data['name'];
+			$newData['email'] = $data['email'];
+			$newData['username'] = $data['username'];						
+			$this->db->where('id', $id)->update($this->table, $newData);
+		}        
         return array('status' => 200, 'message' => 'Data has been updated.');
     }
 
-    public function users_delete_data($id)
+    public function users_delete($id)
     {
         $this->db->where('id', $id)->delete($this->table);
         return array('status' => 200, 'message' => 'Data has been deleted.');

@@ -66,12 +66,14 @@ $route['users/(:num)']['put']    = 'users/update/$1';
 $route['users/(:num)']['delete'] = 'users/delete/$1';
 
 //URLS ROUTER
-$route['urls']['get']          	= 'urls';
-$route['urls/(:num)']['get']    = 'urls/detail/$1';
-$route['urls']['post']   	    = 'urls/create';
-$route['urls/(:num)']['put']    = 'urls/update/$1';
-$route['urls/(:num)']['delete'] = 'urls/delete/$1';
+$route['urls']['get']          		= 'urls';
+$route['urls/user/(:num)']['get']	= 'urls/urlByUser/$1';
+$route['urls/(:num)']['get']    	= 'urls/detail/$1';
+$route['urls']['post']   	    	= 'urls/create';
+$route['urls/(:num)']['put']    	= 'urls/update/$1';
+$route['urls/(:num)']['delete'] 	= 'urls/delete/$1';
+$route['urls/log/(:num)']['get']    = 'urls/log/$1';
 
 //ROBOT CHECK URLS ROUTER
 
-$route['check']['get']          	= 'checkurls';
+$route['check']['get']         	= 'checkurls';

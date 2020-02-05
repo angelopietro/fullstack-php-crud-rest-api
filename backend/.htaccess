@@ -1,13 +1,7 @@
-#Header set Access-Control-Allow-Origin "*"
-<IfModule mod_headers.c>
-  <FilesMatch "\.(ttf|ttc|otf|eot|woff|woff2|font.css|css|js|mp4|iframe)$">
-    Header set Access-Control-Allow-Origin "*"
-  </FilesMatch>
-</IfModule>
-# [ CP Global Redirection - Start ]
+Options -Indexes
 <IfModule mod_rewrite.c>
 RewriteEngine On
-RewriteBase /
+RewriteBase /backend/
 
 # Allow these directories and files to be displayed directly:
 RewriteCond $1 ^(index\.php|robots\.txt|favicon\.ico|public|assets|css|js|images|uploads)
@@ -24,4 +18,3 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.*)$ index.php?/$1 [L]
 </IfModule>
-# [ CP Global Redirection - End ]

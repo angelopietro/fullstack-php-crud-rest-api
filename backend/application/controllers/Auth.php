@@ -18,24 +18,15 @@ class Auth extends CI_Controller
 
 	public function login()
 	{
-		$check_auth_client = $this->AuthModel->check_auth_client();
+		$check_auth = $this->AuthModel->check_auth();
 
-		if ($check_auth_client) {
+		if ($check_auth) {
 			$params = json_decode(file_get_contents('php://input'), TRUE);
 			$username = $params['username'];
 			$password = $params['password'];
 
 			$response = $this->AuthModel->login($username, $password);
-			output_json($response['status'], $response);
+			json_response($response['status'], $response);
 		}
-	}
-
-	public function logout()
-	{
-		$check_auth_client = $this->AuthModel->check_auth_client();
-		if ($check_auth_client == true) {
-			$response = $this->AuthModel->logout();
-			output_json($response['status'], $response);
-		}
-	}
+	}	
 }
