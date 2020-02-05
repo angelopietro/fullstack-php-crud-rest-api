@@ -31,14 +31,27 @@ export class EditUserComponent implements OnInit {
       name: ["", Validators.required],
       email: ["", Validators.required],
       username: ["", Validators.required],
-      password: "",
+      password: null,
       last_login: [""],
       created_at: [""],
       updated_at: [""]
     });
 
     this.apiService.getUserByID(id).subscribe(data => {
-      this.userForm.setValue(data);
+
+      const formPayload = {
+        id: data.id,
+        username: data.username,
+        name: data.name,
+        email: data.email,
+        password: "",
+        last_login: data.last_login,
+        created_at: data.created_at,
+        updated_at: data.updated_at,
+      };
+
+
+      this.userForm.setValue(formPayload);
     });
   }
 
@@ -63,4 +76,7 @@ export class EditUserComponent implements OnInit {
       this.router.navigate(["/users"]);
     });
   }
+
+
+
 }

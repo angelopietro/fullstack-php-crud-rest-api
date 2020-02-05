@@ -35,6 +35,14 @@ export class ApiService {
     );
   }
 
+  getUrlsByUser(): Observable<Url[]> {
+    return this.httpClient.get<Url[]>(
+      environment.BASE_URL + `/urls/user/${localStorage.getItem('user_logged_id')}`,
+      this.httpOptions
+    );
+  }
+
+
   getUrlByID(id: number): Observable<Url> {
     return this.httpClient.get<Url>(
       environment.BASE_URL + `/urls/${id}`,

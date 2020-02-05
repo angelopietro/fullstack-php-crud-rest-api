@@ -7,9 +7,13 @@ import {
   ChangeDetectorRef
 } from "@angular/core";
 import { Subscription, Observable, timer } from "rxjs";
-import { ApiService } from "src/app/services/api.service";
 import * as moment from "moment";
 import { ToastrService } from "ngx-toastr";
+import { DialogConfirmModel, DialogConfirmComponent } from '../../dialog-confirm/dialog-confirm.component';
+
+import { ApiService } from "src/app/services/api.service";
+import { MatDialog } from '@angular/material';
+
 
 @Component({
   selector: "app-list",
@@ -21,13 +25,14 @@ export class ListUrlComponent implements OnInit {
   @Output() TimerExpired: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() SearchDate: moment.Moment = moment();
-  @Input() ElapsTime: number = 0.3;
+  @Input() ElapsTime: number = 0.5;
 
   searchEndDate: moment.Moment;
   remainingTime: number;
   minutes: number;
   seconds: number;
-  status: any;
+  result: string = '';
+  loading = false;
   urls;
 
   everySecond: Observable<number> = timer(0, 1000);
@@ -35,7 +40,8 @@ export class ListUrlComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private toastr: ToastrService,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    public dialog: MatDialog
   ) {
     this.searchEndDate = this.SearchDate.add(this.ElapsTime, "minutes");
   }
@@ -54,7 +60,7 @@ export class ListUrlComponent implements OnInit {
 
         this.TimerExpired.emit();
 
-        this.apiService.checkUrls().subscribe(res => {
+        this.apiService.checkUrls().subscribe((res: any) => {
           if (res.status === 200) {
             this.loadUrls();
           }
@@ -68,8 +74,10 @@ export class ListUrlComponent implements OnInit {
   }
 
   async loadUrls() {
-    await this.apiService.getUrls().subscribe(res => {
+    this.loading = true;
+    await this.apiService.getUrlsByUser().subscribe(res => {
       this.urls = res;
+      this.loading = false;
     });
   }
 
@@ -77,6 +85,27 @@ export class ListUrlComponent implements OnInit {
     this.apiService.deleteUrl(urlID).subscribe(() => {
       this.loadUrls();
       this.toastr.success("Url excluída com sucesso!", "Parabéns!");
+    });
+  }
+
+  confirmDialog(urlID): void {
+    const title = 'Atenção!';
+    const message = `Você realmente deseja eliminar este registro?`;
+
+    const dialogData = new DialogConfirmModel(title, message);
+
+    const dialogRef = this.dialog.open(DialogConfirmComponent, {
+      maxWidth: "500px",
+      data: dialogData
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      this.result = dialogResult;
+
+      if (this.result) {
+        this.handleDelete(urlID);
+      }
+
     });
   }
 

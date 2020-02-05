@@ -1,4 +1,5 @@
-< <form [formGroup]="urlForm" (ngSubmit)="handleSubmit()">
+<form [formGroup]="urlForm" (ngSubmit)="handleSubmit()">
+
   <div class="container" style="padding-top: 80px">
     <div class="row">
       <div class="col-md-12">
@@ -24,7 +25,7 @@
 
                 <mat-form-field appearance="outline">
                   <mat-label>Url</mat-label>
-                  <input matInput id="url" formControlName="url" pattern="https?://.+" minlength="5" maxlength="150"
+                  <input matInput id="url" formControlName="url" pattern="https?://.+" minlength="5" maxlength="150" placeholder="http://"
                     required />
                 </mat-form-field>
 

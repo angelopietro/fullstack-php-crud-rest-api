@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
           const redirect = this.authService.redirectUrl
             ? this.authService.redirectUrl
             : "/dashboard";
-          console.log(redirect);
           this.router.navigate([redirect]);
         },
         error => {

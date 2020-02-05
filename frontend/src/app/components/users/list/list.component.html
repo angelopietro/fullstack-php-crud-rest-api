@@ -6,11 +6,11 @@
     <div class="card-body">
 
 
-
-
   <a [routerLink]="['/users/new/']"  routerLinkActive="router-link-active" class="mr-2 btn btn-success" mat-raised-button><i
     class="material-icons mr-3">person_add</i> Adicionar Usuário</a>
 
+
+    <mat-progress-spinner diameter="30" mode="indeterminate" *ngIf="loading" color="warn" class="loading"></mat-progress-spinner>
 
   <table>
   <thead>
@@ -37,7 +37,9 @@
     <td>
       <a [routerLink]="['/users/edit/' + usr.id]"  class="btn btn-link btn-info"  title="Editar Usuário" alt="Editar Usuário">editar</a>
       &nbsp;
-      <a class="btn btn-danger btn-link" alt="Remover Usuário" (click)="handleDelete(usr.id)">excluir</a>
+
+      <a *ngIf="usr.username !== 'admin'" class="btn btn-danger btn-link" alt="Remover Usuário" (click)="confirmDialog(usr.id)">excluir</a>
+
   </td>
   </tr>
   </tbody>

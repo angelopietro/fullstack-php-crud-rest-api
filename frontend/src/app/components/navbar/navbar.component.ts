@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-navbar',
@@ -11,17 +10,17 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./navbar.component.less']
 })
 export class NavbarComponent implements OnInit {
-
+  userName: string;
   constructor(private router: Router, private toastr: ToastrService, private httpClient: HttpClient) { }
 
   ngOnInit() {
+   this.userName = localStorage.getItem('user_logged_name');
   }
 
   logout() {
     localStorage.clear();
     this.toastr.success('Você saiu do sistema!');
     this.router.navigate(['/login']);
-    return this.httpClient.post(environment.BASE_URL +'/auth/logout', '');
   }
 
 }

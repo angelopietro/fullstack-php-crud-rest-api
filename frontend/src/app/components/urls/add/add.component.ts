@@ -25,6 +25,7 @@ constructor(
 ngOnInit() {
 
   this.urlForm = this.formBuilder.group({
+    user_id:  localStorage.getItem('user_logged_id'),
     title: ['', Validators.required],
     url: ['', Validators.required]
   });

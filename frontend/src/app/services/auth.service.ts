@@ -36,6 +36,8 @@ export class AuthService {
       )
       .pipe(
         tap(res => {
+          localStorage.setItem("user_logged_id", res.id);
+          localStorage.setItem("user_logged_name", res.name);
           localStorage.setItem("access_token", res.token);
           this.getLoggedIn.emit(true);
           return res;

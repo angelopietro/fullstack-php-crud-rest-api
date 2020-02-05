@@ -14,7 +14,11 @@
       <a [routerLink]="['/urls/new/']" routerLinkActive="router-link-active" class="mr-2 btn btn-success"
         mat-raised-button><i class="material-icons mr-3">link</i> Adicionar Url</a>
 
-      <table>
+
+    <mat-progress-spinner diameter="30" mode="indeterminate" *ngIf="loading" color="warn" class="loading"></mat-progress-spinner>
+
+      <div *ngIf="urls?.length == 0" class="warn">Não há Urls cadastradas!</div>
+      <table  *ngIf="urls?.length != 0">
         <thead>
           <tr>
             <td class="label-strong">#</td>
@@ -28,10 +32,10 @@
             <td>{{ url.id }}</td>
             <td>{{ url.title }}</td>
             <td style="text-align: center;">
-              <span *ngIf="url.status == 0"><i class="material-icons"
-                  style="color:grey; font-size: 18px;">update</i></span>
-              <span *ngIf="url.status == 1"><i class="material-icons"
-                  style="color: green; font-size: 18px;">link</i></span>
+              <span *ngIf="url.status == 0" style="color:red;"><i class="material-icons"
+                  style="font-size: 18px;">update</i><br>aguardando</span>
+              <span *ngIf="url.status == 1" style="color: green;"><i class="material-icons"
+                  style="font-size: 18px;">link</i><br>verificado</span>
             </td>
             <td>
               <span *ngIf="url.status == 1">
@@ -46,7 +50,7 @@
               <a [routerLink]="['/urls/edit/' + url.id]" class="btn btn-link btn-info" title="Editar Url"
                 alt="Editar Url">editar</a>
               &nbsp;
-              <a class="btn btn-danger btn-link" alt="Remover Url" (click)="handleDelete(url.id)">excluir</a>
+              <a class="btn btn-danger btn-link" alt="Remover Url" (click)="confirmDialog(url.id)">excluir</a>
             </td>
           </tr>
         </tbody>
