@@ -1,70 +1,113 @@
-import { Injectable } from '@angular/core';
-import { Observable } from  'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import { Url } from '../interfaces/url';
-import { User } from '../interfaces/user';
-import { environment } from 'src/environments/environment';
+import { Url } from "../interfaces/url";
+import { User } from "../interfaces/user";
+import { environment } from "src/environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class ApiService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: environment.AUTH_KEY
+    })
+  };
 
-  PHP_API_SERVER = "api";
+  constructor(private httpClient: HttpClient) {}
 
-  constructor(private httpClient: HttpClient) { }
+  //CHECK URLS
+  checkUrls() {
+    return this.httpClient.get(
+      environment.BASE_URL + `/check`,
+      this.httpOptions
+    );
+  }
 
   //URLS
-  getUrls(): Observable<Url[]>{
-    return this.httpClient.get<Url[]>(environment.BASE_URL + `/urls`);
+  getUrls(): Observable<Url[]> {
+    return this.httpClient.get<Url[]>(
+      environment.BASE_URL + `/urls`,
+      this.httpOptions
+    );
   }
 
   getUrlByID(id: number): Observable<Url> {
-      return this.httpClient.get<Url>(environment.BASE_URL + `/urls/${id}`);
+    return this.httpClient.get<Url>(
+      environment.BASE_URL + `/urls/${id}`,
+      this.httpOptions
+    );
   }
-
 
   getUrlLog(id: number): Observable<Url> {
-    return this.httpClient.get<Url>(environment.BASE_URL + `/urls/log/${id}`);
+    return this.httpClient.get<Url>(
+      environment.BASE_URL + `/urls/log/${id}`,
+      this.httpOptions
+    );
   }
 
-
-  createUrl(url: Url): Observable<Url>{
-
-    return this.httpClient.post<Url>(environment.BASE_URL + `/urls`, url);
+  createUrl(url: Url): Observable<Url> {
+    return this.httpClient.post<Url>(
+      environment.BASE_URL + `/urls`,
+      url,
+      this.httpOptions
+    );
   }
 
-  updateUrl(url: Url): Observable<Url>{
-
-    return this.httpClient.put<Url>(environment.BASE_URL + `/urls/${url.id}`, url);
+  updateUrl(url: Url): Observable<Url> {
+    return this.httpClient.put<Url>(
+      environment.BASE_URL + `/urls/${url.id}`,
+      url,
+      this.httpOptions
+    );
   }
 
-  deleteUrl(id: number){
-     return this.httpClient.delete<Url>(environment.BASE_URL + `/urls/${id}`);
+  deleteUrl(id: number) {
+    return this.httpClient.delete<Url>(
+      environment.BASE_URL + `/urls/${id}`,
+      this.httpOptions
+    );
   }
 
   //Users
 
-  getUsers(): Observable<User[]>{
-    return this.httpClient.get<User[]>(environment.BASE_URL + `/users`);
+  getUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(
+      environment.BASE_URL + `/users`,
+      this.httpOptions
+    );
   }
 
   getUserByID(id: number): Observable<User> {
-    return this.httpClient.get<User>(environment.BASE_URL + `/users/${id}`);
+    return this.httpClient.get<User>(
+      environment.BASE_URL + `/users/${id}`,
+      this.httpOptions
+    );
   }
 
-
-  createUser(user: User): Observable<User>{
-    return this.httpClient.post<User>(environment.BASE_URL + `/users`, user);
+  createUser(user: User): Observable<User> {
+    return this.httpClient.post<User>(
+      environment.BASE_URL + `/users`,
+      user,
+      this.httpOptions
+    );
   }
 
-  updateUser(user: User){
-    return this.httpClient.put<User>(environment.BASE_URL + `/users/${user.id}`, user);
+  updateUser(user: User) {
+    return this.httpClient.put<User>(
+      environment.BASE_URL + `/users/${user.id}`,
+      user,
+      this.httpOptions
+    );
   }
 
-  deleteUser(id: number){
-    return this.httpClient.delete<User>(environment.BASE_URL + `/users/${id}`);
+  deleteUser(id: number) {
+    return this.httpClient.delete<User>(
+      environment.BASE_URL + `/users/${id}`,
+      this.httpOptions
+    );
   }
-
 }

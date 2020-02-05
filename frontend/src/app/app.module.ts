@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 //Pages
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
+import { TemplateComponent } from './pages/template/template.component';
 
 //Components
 import { ListUrlComponent } from './components/urls/list/list.component';
@@ -22,16 +24,18 @@ import { ListUserComponent } from './components/users/list/list.component';
 import { AddUserComponent } from './components/users/add/add.component';
 import { EditUserComponent } from './components/users/edit/edit.component';
 
-//Libs Module
-import {MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule, MatIconModule, MatMenuModule, MatTableModule, MatDialogModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { VerifyStatusComponent } from './components/verify-status/verify-status.component';
 import { PreviewUrlComponent } from './components/urls/preview/preview.component';
-import { LoginComponent } from './pages/login/login.component';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { TemplateComponent } from './pages/template/template.component';
+
+
+//Libs Module
+import {MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatProgressSpinnerModule, MatIconModule, MatMenuModule, MatTableModule, MatDialogModule, MatToolbarModule, MatTooltipModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -44,7 +48,6 @@ import { TemplateComponent } from './pages/template/template.component';
     ListUserComponent,
     AddUserComponent,
     EditUserComponent,
-    VerifyStatusComponent,
     PreviewUrlComponent,
     LoginComponent,
     FooterComponent,
@@ -69,8 +72,13 @@ import { TemplateComponent } from './pages/template/template.component';
     MatMenuModule,
     MatIconModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
-
+    MatProgressSpinnerModule,
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      progressBar: true,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

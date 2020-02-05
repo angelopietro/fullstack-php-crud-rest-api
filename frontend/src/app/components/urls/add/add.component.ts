@@ -3,6 +3,8 @@ import { Router } from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import { ApiService } from '../../../services/api.service';
+import { ToastrService } from 'ngx-toastr';
+
 import { Url } from '../../../interfaces/url';
 
 @Component({
@@ -14,7 +16,11 @@ export class AddUrlComponent implements OnInit {
 urlForm: FormGroup;
 url: Url[];
 
-constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router) { }
+constructor(
+  private apiService: ApiService,
+  private formBuilder: FormBuilder,
+  private router: Router,
+  private toastr: ToastrService) { }
 
 ngOnInit() {
 
@@ -42,7 +48,8 @@ handleSubmit(): void {
 
     this.apiService.createUrl(this.urlForm.value)
     .subscribe(() => {
-      this.router.navigate(["/urls"])
+      this.toastr.success('Url cadastrada com sucesso!', 'Parabéns!');
+      this.router.navigate(["/urls"]);
     });
   }
 }

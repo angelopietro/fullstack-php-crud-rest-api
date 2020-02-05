@@ -35,9 +35,9 @@
     <td>{{ usr.username}}</td>
     <td>{{ usr.last_login | date: 'dd/MM/yyyy - hh:mm' }}</td>
     <td>
-      <a [routerLink]="['/users/edit/' + usr.id]"  class="btn btn-link btn-info"  title="Editar Usuário" alt="Editar Usuário"><i class="material-icons">edit</i></a>
+      <a [routerLink]="['/users/edit/' + usr.id]"  class="btn btn-link btn-info"  title="Editar Usuário" alt="Editar Usuário">editar</a>
       &nbsp;
-      <a class="btn btn-danger btn-link" alt="Remover Usuário" (click)="handleDelete(usr.id)"><i class="material-icons">delete_forever</i></a>
+      <a class="btn btn-danger btn-link" alt="Remover Usuário" (click)="handleDelete(usr.id)">excluir</a>
   </td>
   </tr>
   </tbody>

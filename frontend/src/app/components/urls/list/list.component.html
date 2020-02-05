@@ -2,8 +2,10 @@
   <div class="card col-md-12">
     <div class="card-header card-header-success">
       <h4 class="card-title float-left">Lista de Urls</h4>
-      <div class="col-md-5 float-right">
-        <app-verify-status></app-verify-status>
+      <div class="float-right">
+
+        Verificando urls em <span class="time">{{minutes}}</span> Minutos <span class="time">{{seconds}}</span> Segundos
+
       </div>
     </div>
     <div class="card-body">
@@ -17,9 +19,7 @@
           <tr>
             <td class="label-strong">#</td>
             <td class="label-strong">Titulo</td>
-            <td class="label-strong">Status</td>
-            <td class="label-strong"></td>
-            <td class="label-strong"></td>
+            <td class="label-strong" colspan="3">Status</td>
           </tr>
         </thead>
 
@@ -31,23 +31,22 @@
               <span *ngIf="url.status == 0"><i class="material-icons"
                   style="color:grey; font-size: 18px;">update</i></span>
               <span *ngIf="url.status == 1"><i class="material-icons"
-                  style="color: green; font-size: 18px;">check_circle</i></span>
+                  style="color: green; font-size: 18px;">link</i></span>
             </td>
             <td>
               <span *ngIf="url.status == 1">
                 <a [routerLink]="['/urls/preview/' + url.id]" title="Visualiar dados da Url"
-                  alt="Visualizar dados da Url">
-                  <i class="material-icons" style="color:orange; font-size: 18px;">info</i>
+                  alt="Visualizar dados da Url" class="btn btn-link">
+                  <i class="material-icons" style="color:orange; font-size: 18px;">remove_red_eye</i> detalhes
                 </a>
               </span>
             </td>
 
             <td>
-              <a [routerLink]="['/urls/edit/' + url.id]" class="btn btn-link btn-info" matTooltip="Editar Url"
-                matTooltipPosition="above" title="Editar Url" alt="Editar Url"><i class="material-icons">edit</i></a>
+              <a [routerLink]="['/urls/edit/' + url.id]" class="btn btn-link btn-info" title="Editar Url"
+                alt="Editar Url">editar</a>
               &nbsp;
-              <a class="btn btn-danger btn-link" matTooltip="Remover Url" matTooltipPosition="above" alt="Remover Url"
-                (click)="handleDelete(url.id)"><i class="material-icons">delete_forever</i></a>
+              <a class="btn btn-danger btn-link" alt="Remover Url" (click)="handleDelete(url.id)">excluir</a>
             </td>
           </tr>
         </tbody>

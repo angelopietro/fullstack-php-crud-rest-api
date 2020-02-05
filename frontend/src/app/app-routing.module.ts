@@ -9,7 +9,6 @@ import { PreviewUrlComponent } from './components/urls/preview/preview.component
 import { AddUserComponent } from './components/users/add/add.component';
 import { EditUserComponent } from './components/users/edit/edit.component';
 import { ListUserComponent } from './components/users/list/list.component';
-import { VerifyStatusComponent } from './components/verify-status/verify-status.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { TemplateComponent } from './pages/template/template.component';
@@ -20,40 +19,38 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path : '', component : LoginComponent},
 
-  { path: 'dashboard', component: TemplateComponent,
-  children: [{ path: '',  component: DashboardComponent}]},//, canActivate: [AuthGuard]
+  { path: 'dashboard', component: TemplateComponent, canActivate: [AuthGuard],
+    children: [{ path: '',  component: DashboardComponent}]},
 
   /*URL ROUTE*/
-  { path: 'urls', component: TemplateComponent,
+  { path: 'urls', component: TemplateComponent, canActivate: [AuthGuard],
   children: [{ path: '',  component: ListUrlComponent}]
   },
 
-  { path: 'urls/new', component: TemplateComponent,
+  { path: 'urls/new', component: TemplateComponent, canActivate: [AuthGuard],
   children: [{ path: '',  component: AddUrlComponent}]
   },
 
-  { path: 'urls/edit/:id', component: TemplateComponent,
+  { path: 'urls/edit/:id', component: TemplateComponent, canActivate: [AuthGuard],
   children: [{ path: '', component: EditUrlComponent }]
   },
 
-  { path: 'urls/preview/:id', component: TemplateComponent,
+  { path: 'urls/preview/:id', component: TemplateComponent, canActivate: [AuthGuard],
   children: [{ path: '', component: PreviewUrlComponent}]
   },
 
   /*USER ROUTE*/
-  { path: 'users', component: TemplateComponent,
+  { path: 'users', component: TemplateComponent, canActivate: [AuthGuard],
     children: [{ path: '', component: ListUserComponent }]
   },
 
-  { path: 'users/new', component: TemplateComponent,
+  { path: 'users/new', component: TemplateComponent, canActivate: [AuthGuard],
     children: [{ path: '', component: AddUserComponent }]
   },
 
-  { path: 'users/edit/:id', component: TemplateComponent,
+  { path: 'users/edit/:id', component: TemplateComponent, canActivate: [AuthGuard],
     children: [{ path: '', component: EditUserComponent }]
   },
-
-  { path: 'verify', component: VerifyStatusComponent},
 
   { path: '**', component: PageNotFoundComponent }
 ];

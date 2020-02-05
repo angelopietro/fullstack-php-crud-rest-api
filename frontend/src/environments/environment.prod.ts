@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  API: 'http://localhost:80/backend',
-  BASE_URL: ''
+  API: '',
+  BASE_URL: '',
+  AUTH_KEY: ''
 };

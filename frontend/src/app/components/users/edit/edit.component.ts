@@ -1,45 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { ApiService } from '../../../services/api.service';
-import { User } from '../../../interfaces/user';
+import { ApiService } from "../../../services/api.service";
+import { ToastrService } from "ngx-toastr";
+import { User } from "../../../interfaces/user";
 
 @Component({
-  selector: 'app-user-edit',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.less']
+  selector: "app-user-edit",
+  templateUrl: "./edit.component.html",
+  styleUrls: ["./edit.component.less"]
 })
 export class EditUserComponent implements OnInit {
-
   userForm: FormGroup;
   user: User[];
 
-  constructor(private apiService: ApiService, private formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute) { }
-
+  constructor(
+    private apiService: ApiService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit() {
-
     let id = this.route.snapshot.params["id"];
 
     this.userForm = this.formBuilder.group({
-      id: [''],
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      username: ['', Validators.required],
-      password: '',
-      last_login: [''],
-      created_at: [''],
-      updated_at: [''],
+      id: [""],
+      name: ["", Validators.required],
+      email: ["", Validators.required],
+      username: ["", Validators.required],
+      password: "",
+      last_login: [""],
+      created_at: [""],
+      updated_at: [""]
     });
 
-
-    this.apiService.getUserByID(id)
-    .subscribe( data => {
+    this.apiService.getUserByID(id).subscribe(data => {
       this.userForm.setValue(data);
-      console.log(data);
     });
-
   }
 
   handleSubmit(): void {
@@ -52,15 +52,15 @@ export class EditUserComponent implements OnInit {
       name: this.userForm.controls.name.value,
       email: this.userForm.controls.email.value,
       username: this.userForm.controls.username.value,
-      password: this.userForm.controls.password.value,
+      password: this.userForm.controls.password.value
+    };
 
-
-    }
-
-      this.apiService.updateUser(formPayload)
-      .subscribe(() => {
-        //console.log(formPayload);
-        this.router.navigate(["/users"])
-      });
-    }
+    this.apiService.updateUser(formPayload).subscribe(() => {
+      this.toastr.success(
+        "Dados do usuário atualizados com sucesso!",
+        "Parabéns!"
+      );
+      this.router.navigate(["/users"]);
+    });
+  }
 }
