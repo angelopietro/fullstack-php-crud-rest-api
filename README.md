@@ -63,7 +63,7 @@ define('SECRET_KEY','');
 'password' => '',
 'database' => '',
 ```
- 
+5. Realize o restore do database importando o arquivo **dump.sql** existente na raíz do direrório backend.
 ---
 
 ### Frontend 
