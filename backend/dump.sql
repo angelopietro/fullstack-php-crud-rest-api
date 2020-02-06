@@ -8,8 +8,8 @@ CREATE TABLE `urls` (
   `title` varchar(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `status` int(11) DEFAULT '0',
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -23,8 +23,8 @@ CREATE TABLE `urls_log` (
   `id_url` int(11) NOT NULL,
   `response_code` int(11) NOT NULL,
   `response_msg` text NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -40,10 +40,10 @@ CREATE TABLE `users` (
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `token` varchar(200) NOT NULL,
-  `last_login` datetime DEFAULT CURRENT_TIMESTAMP,
-  `expired_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP
+  `last_login` datetime,
+  `expired_at` datetime NOT NULL,
+  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
