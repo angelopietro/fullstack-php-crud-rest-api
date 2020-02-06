@@ -14,9 +14,9 @@ O intuito desta aplicação é realizar um cadastro de Urls o qual será validad
 
 [Visual Studio Code](https://code.visualstudio.com/) - Editor de código  
 [Imsomnia](https://insomnia.rest/) - Cliente de serviços http (APIs)  
-[PhpMyAdmin](https://www.phpmyadmin.net/) - Administrador MySQL via web
-[MySQL](https://www.mysql.com/  ) - Banco de dados relacional
-[CodeIgniter](https://codeigniter.com/) - PHP framework
+[PhpMyAdmin](https://www.phpmyadmin.net/) - Administrador MySQL via web  
+[MySQL](https://www.mysql.com/  ) - Banco de dados relacional  
+[CodeIgniter](https://codeigniter.com/) - PHP framework  
  
 
 # Passos para instalação
